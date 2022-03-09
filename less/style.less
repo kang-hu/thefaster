@@ -1,0 +1,346 @@
+@import '/node_modules/reset-css/less/reset';
+@import 'style-util.less';
+
+:global {
+  [v-cloak] {
+    display: none;
+  }
+
+  html {
+    height: 100%;
+  }
+  body {
+    font-family: '微軟正黑體';
+    background: #532e1c;
+    height: 100%;
+    overflow: auto;
+    min-width: 1000px;
+    @media screen and (max-width: 640px) {
+      min-width: auto;
+    }
+  }
+
+  .l-wrap {
+    height: 100%;
+    height: calc(100% - 50px);
+    min-height: 720px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+    @media screen and (max-width: 640px) {
+      justify-content: flex-start;
+      min-height: 1138px;
+      min-width: auto;
+    }
+  }
+
+  .main {
+    &-test {
+      color: #000000;
+    }
+  }
+
+  .header {
+    width: 100%;
+    background: #ffffff;
+    box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.25);
+    position: fixed;
+    height: 50px;
+    top: 0;
+    left: 0;
+    z-index: 8000;
+    @media screen and (max-width: 640px) {
+      background: none;
+      box-shadow: none;
+      height: 80px;
+      position: fixed;
+    }
+    &-inner {
+      display: flex;
+      align-items: center;
+      width: 1280px;
+      height: 100%;
+      margin: 0 auto;
+      @media screen and (min-width: 641px) and (max-width: 1280px) {
+        width: 1000px;
+      }
+      @media screen and (max-width: 640px) {
+        width: 100%;
+      }
+    }
+  }
+
+  .rt {
+    &-logo {
+      &-img {
+        width: 100px;
+        height: 40px;
+        background: url(../images/logo.png) center center no-repeat;
+        display: block;
+        @media screen and (max-width: 640px) {
+          width: 134px;
+          height: 46px;
+          background: url(../images/logo-m.png) center center no-repeat;
+          background-size: auto 100%;
+        }
+      }
+    }
+    &-banner {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 1000;
+      box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.5);
+      border-radius: 100%;
+      &:hover {
+        opacity: 0.9;
+      }
+      @media screen and (max-width: 640px) {
+        right: 10px;
+        bottom: 10px;
+      }
+      &-img {
+        width: 100px;
+      }
+    }
+  }
+
+  .game {
+    &-wrap {
+      position: relative;
+      overflow: hidden;
+    }
+    &-msg {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 150px;
+      background: url(../images/ruru.svg) 240px 20px rgba(255,255,255,0.75) no-repeat;
+      background-size: 100px 100px;
+      border-top: 5px solid #532e1c;
+      @media screen and (max-width: 640px) {
+        position: fixed;
+        background: url(../images/ruru.svg) 40px 20px rgba(255,255,255,0.75) no-repeat;
+        background-size: 120px 120px;
+      }
+      &-box {
+        background: #ffffff;
+        border: 4px solid #532e1c;
+        border-radius: 10px;
+        box-sizing: border-box;
+        padding: 20px;
+        width: 390px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-130px, -50%);
+        @media screen and (max-width: 640px) {
+
+        }
+        &:before {
+          content: ' ';
+          width: 0;
+          height: 0;
+          border-style: solid;
+          border-width: 14px 24px 14px 0;
+          border-color: transparent #532e1c transparent transparent;
+          position: absolute;
+          left: -24px;
+          top: 50%;
+          transform: translate(0,-50%);
+          @media screen and (max-width: 640px) {
+            left: -24px;
+          }
+        }
+        &:after {
+          content: ' ';
+          width: 0;
+          height: 0;
+          border-style: solid;
+          border-width: 10px 20px 10px 0;
+          border-color: transparent #ffffff transparent transparent;
+          position: absolute;
+          left: -20px;
+          top: 50%;
+          transform: translate(0,-50%);
+          @media screen and (max-width: 640px) {
+            left: -18px;
+          }
+        }
+      }
+      &-text {
+        font-size: 20px;
+      }
+      &-over {
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .dead-s {
+        background: url(../images/deadS.svg) center center no-repeat;
+        background-size: 80px 80px;
+        width: 80px;
+        height: 60px;
+        display: block;
+        margin: 0 10px 0 0;
+      }
+    }
+  }
+
+  #mycanvas {
+    cursor: pointer;
+    border-radius: 10px;
+  }
+
+  .popup {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color:rgba(0,0,0,.75);
+    overflow-x:hidden;
+    overflow-y:auto;
+    z-index: 9000;
+    &-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      height: 100%;
+    }
+    &-btn-close {
+      background: url(../images/popup_close.png) no-repeat center center;
+      display: block;
+      width: 60px;
+      height: 60px;
+      position: absolute;
+      right: -20px;
+      top: -20px;
+    }
+    &-btn-check {
+      background: url(../images/btn-check.png) no-repeat center center;
+      display: inline-block;
+      width: 271px;
+      height: 60px;
+      &.is-bottom {
+        position: absolute;
+        left: 50%;
+        bottom: 40px;
+        transform: translateX(-50%);
+      }
+    }
+    &-normal {
+      width: 385px;
+      height: 550px;
+      position: relative;
+    }
+    &-text {
+      line-height: 1.5;
+      color: #ffffff;
+      font-size: 20px;
+      font-weight: bold;
+    }
+    &-start {
+      background: url(../images/pop_bg_1.png) center center no-repeat;
+      .game-rule {
+        padding: 100px 40px 0 40px;
+        word-wrap: break-word;
+      }
+    }
+    &-ticket-small {
+      background: url(../images/pop_ticket_1.png) center center no-repeat;
+      .msg-area {
+        position: absolute;
+        left: 50%;
+        top: 160px;
+        font-size: 24px;
+        transform: translateX(-40px);
+        &-num {
+          padding: 0 5px;
+        }
+      }
+    }
+    &-ticket-big {
+      background: url(../images/pop_ticket_2.png) center center no-repeat;
+      .msg-area {
+        position: absolute;
+        left: 50%;
+        top: 350px;
+        transform: translateX(-50%);
+        text-align: center;
+        .popup-text {
+          font-size: 24px;
+        }
+        &-num {
+          padding: 0 5px;
+        }
+      }
+    }
+    &-over {
+      .dead-s {
+        background: url(../images/deadS.svg) center center no-repeat;
+        background-size: 220px 220px;
+        width: 220px;
+        height: 220px;
+        position: absolute;
+        display: block;
+      }
+      .popup-text {
+        font-size: 30px;
+        text-align: center;
+        padding: 80px 0 0 0;
+      }
+    }
+    .check-mine {
+      text-align: center;
+      padding: 90px 0 0 0;
+      .popup-btn-check {
+        margin: 30px 0 0 0;
+      }
+    }
+  }
+
+  .loading {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #532e1c;
+    overflow-x:hidden;
+    overflow-y:auto;
+    z-index: 9001;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &-text {
+      color: #ffffff;
+      font-size: 36px;
+      > span {
+        font-size: 40px;  
+      }
+    }
+  }
+
+  .again {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.25);
+    left: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &-btn {
+      background: url(../images/btn-again.png) no-repeat center center;
+      display: inline-block;
+      width: 271px;
+      height: 60px;
+    }
+  }
+}
+

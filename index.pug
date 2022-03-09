@@ -1,0 +1,75 @@
+doctype
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv="X-UA-Compatible" content="IE=edge")
+    title 眼明尬手快
+    meta(name="viewport" content="width=640")
+    link(rel="stylesheet" type="text/css" media="screen" href="./less/style.less")
+  body
+    div#app.l-wrap
+      transition(
+        @leave="loadLeave")
+        div.loading(v-if="isLoading" )
+          p.loading-text(v-cloak)
+            span {{loadingCount}}
+            |%
+      div.rt-banner
+        a(href="https://pub.ruten.com.tw/20181111/index.html")
+          img.rt-banner-img(src="images/banner_eleven.png", v-if = "bannerIsEleven" , alt="快!這裡集彩票")
+          img.rt-banner-img(src="images/banner_shopping.png", v-else alt="快!這裡集彩票")
+      div.game-wrap
+        div.game-canvas-area(@click="userAction")
+          canvas#mycanvas
+        div.again(v-show="showAgain")
+          a.again-btn(href="javascript:;" @click="resetGame")
+        transition(
+          @enter="msgEnter"
+          @leave="msgLeave")
+          div.game-msg(v-cloak v-show="showMsg" @click="showMsg=false")
+            div.game-msg-box
+              p.game-msg-text(v-show="!getDeadS") {{msgText}}
+              p.game-msg-over(v-show="getDeadS")
+                i.dead-s
+                |燈仍!!!遊戲結束囉~~
+      div.popup(v-cloak v-show="showPopup")
+        div.popup-content
+          transition(@enter="popEnter")
+            div.popup-normal.popup-start(v-show="showRule")
+              a.popup-btn-close(href="javascript:;" @click="startGame()")
+              div.game-rule
+                p.popup-text 關主發牌
+                p.popup-text 先搶到彩票者，即可獲得彩票！
+                p.popup-text 不小心點到死蝦，遊戲就結束囉。
+                p.popup-text 快來跟我一起挑戰眼明尬手快。
+          transition(@enter="popEnter")
+            div.popup-normal.popup-ticket-small(v-show="showAwardSmall")
+              a.popup-btn-close(href="javascript:;" @click="resetGame()")
+              p.popup-text.msg-area 彩票
+                span.msg-area-num {{awardPoints}}
+                |張進帳囉~
+              a.popup-btn-check.is-bottom(href="https://point.ruten.com.tw/coin/detail.php" target="_blank" @click="resetGame()")
+          transition(@enter="popEnter")
+            div.popup-normal.popup-ticket-big(v-show="showAwardBig")
+              a.popup-btn-close(href="javascript:;" @click="resetGame()")
+              div.msg-area
+                p.popup-text 阿不就好棒棒！
+                p.popup-text 送你彩票
+                  span.msg-area-num {{awardPoints}}
+                  |張
+              a.popup-btn-check.is-bottom(href="https://point.ruten.com.tw/coin/detail.php" target="_blank" @click="resetGame()")
+                    transition(@enter="popEnter")
+          transition(@enter="popEnter")
+            div.popup-normal.popup-start(v-show="showAlreadyGet")
+              a.popup-btn-close(href="javascript:;" @click="startGame()")
+              div.game-rule
+                p.popup-text 本日已領過彩票囉！
+                p.popup-text 快去其他關卡挑戰拿彩票吧 ~
+          transition(@enter="popEnter")
+            div.popup-normal.popup-start(v-show="showCheckMine")
+              a.popup-btn-close(href="javascript:;" @click="resetGame()")
+              div.check-mine
+                p.popup-text 今天彩票已經進帳囉！
+                p.popup-text 這次不會再歸戶了。
+                a.popup-btn-check(href="https://point.ruten.com.tw/coin/detail.php" target="_blank" @click="resetGame()")
+    script(src="./js/index.js")
